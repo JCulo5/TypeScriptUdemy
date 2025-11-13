@@ -1,5 +1,5 @@
-namespace App{
-    type Listener<T> = (items: T[]) => void;
+import { Project, ProjectStatus } from "../models/project-model.js";
+type Listener<T> = (items: T[]) => void;
 
 class State<T> {
   protected listeners: Listener<T>[] = [];
@@ -39,12 +39,11 @@ export class ProjectState extends State<Project> {
     }
   }
 
-
   moveProject(projectId: string, newStatus: ProjectStatus) {
-    const project = this.projects.find(prj => prj.id === projectId);
-    if(project && project.status !== newStatus){
-        project.status = newStatus;
-        this.updateListeners();
+    const project = this.projects.find((prj) => prj.id === projectId);
+    if (project && project.status !== newStatus) {
+      project.status = newStatus;
+      this.updateListeners();
     }
   }
 
@@ -56,4 +55,3 @@ export class ProjectState extends State<Project> {
 }
 
 export const projectState = ProjectState.getInstance();
-}
