@@ -8,11 +8,8 @@ const dataShema = z.object({
   id: z.number(),
   values: z.array(z.string()),
 });
-type Data = {
-  title: string;
-  id: number;
-  values: string[];
-};
+
+type Data = z.infer<typeof dataShema>;
 function output(data: Data) {
   console.log(data);
 }
